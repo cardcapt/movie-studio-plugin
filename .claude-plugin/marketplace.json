@@ -8,9 +8,9 @@
   },
   "plugins": [
     {
-      "name": "company",
-      "source": "./plugins/company",
-      "description": "対話的オンボーディングで仮想会社組織を構築。制作デスクが窓口となり、プロデューサーが各部署へ指示を振り分ける。",
+      "name": "movie-studio",
+      "source": "./plugins/movie-studio",
+      "description": "対話的オンボーディングで仮想映画制作スタジオを構築。制作デスクが窓口となり、プロデューサーが各制作部門へ指示を振り分ける。",
       "version": "1.0.0",
       "author": {
         "name": "Shin-sibainu"
