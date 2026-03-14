@@ -1,1053 +1,595 @@
-# 部署別テンプレート集
+# 部門別テンプレート
 
-組織構築時に各部署フォルダへ配置する `_template.md` のテンプレート。
-言語設定に応じて日本語版または英語版を使い分ける。
+このファイルは `movie-studio` スキルで使用する部門別テンプレート集です。
+`SKILL.md` の部門構成・ディレクトリ構造・命名規則と整合するように定義します。
 
 ---
 
-## 1. 制作デスク室
+## 共通ルール
 
-### デイリーTODO（secretary/todos/_template.md）
+* すべてのファイル名は `kebab-case` を使用する
+* 日付ベースのファイル名は `YYYY-MM-DD` を使用する
+* 既存ファイルは原則として上書きせず、追記または新規作成で対応する
+* 各部門は必要に応じて他部門と連携し、関連ファイルへの参照を記載する
+* 各部門の `CLAUDE.md` には役割・命名規則・作業ポリシーを記載する
 
-```markdown
 ---
-date: "{{YYYY-MM-DD}}"
-type: daily
----
 
-# {{YYYY-MM-DD}} ({{DAY_OF_WEEK}})
+## production-desk
 
-## 最優先
-- [ ]
+### 役割
 
-## 通常
-- [ ]
+* すべての依頼の窓口
+* TODO 管理
+* メモ保存
+* 壁打ち・相談対応
+* プロデューサーへの取り次ぎ
 
-## 余裕があれば
-- [ ]
+### CLAUDE.md テンプレート
 
-## 完了
-- [x]
+```md
+# production-desk
 
-## メモ・振り返り
--
+## 役割
+
+- ユーザーとの対話の窓口を担当する
+- TODO、メモ、相談、壁打ちを整理する
+- 専門部門が必要な場合はプロデューサーへ振り分ける
+
+## 口調
+
+- 丁寧だが堅すぎない
+- 親しみやすく、提案型
+- 必要に応じて過去のメモやタスクを参照する
+
+## 対応ポリシー
+
+- ユーザーに部門構造を意識させない
+- 単純な整理や相談はここで完結する
+- 専門作業が必要な場合のみ他部門へ回す
 ```
 
-### Inbox（secretary/inbox/_template.md）
+### _template.md
 
-```markdown
----
-date: "{{YYYY-MM-DD}}"
-type: inbox
----
+```md
+# タイトル
 
-# Inbox - {{YYYY-MM-DD}}
+## 概要
 
-## キャプチャ
+## 現状
 
-- **{{HH:MM}}** |
-```
+## 次にやること
 
-### 壁打ち・相談メモ（secretary/notes/_template.md）
-
-```markdown
----
-created: "{{YYYY-MM-DD}}"
-topic: ""
-type: note
-tags: []
----
-
-# [相談テーマ]
-
-## 背景・きっかけ
-何について考えたい？
-
-## 議論・思考メモ
--
-
-## 結論・ネクストアクション
-- [ ]
-```
-
-### 制作デスク室トップ（secretary/_template.md）
-
-```markdown
----
-type: department
-name: 制作デスク室
-role: 窓口・相談役・タスク管理
----
-
-# 制作デスク室
-
-何でもお気軽にどうぞ。TODO管理、壁打ち、メモ、何でも承ります。
-
-## サブフォルダ
-- `inbox/` - クイックキャプチャ。とりあえずここに
-- `todos/` - 日次タスク管理
-- `notes/` - 壁打ち・相談メモ
+## 関連ファイル
 ```
 
 ---
 
-## 2. プロデューサー
+## producer
 
-### 意思決定ログ（プロデューサー/decisions/_template.md）
+### 役割
 
-```markdown
----
-date: "{{YYYY-MM-DD}}"
-decision: ""
-departments: []
-status: decided
----
+* 部門振り分け
+* 優先順位判断
+* 制作方針の意思決定
+* 部門間連携の調整
 
-# 意思決定: [タイトル]
+### CLAUDE.md テンプレート
 
-## 背景
-何が起きた？何が求められた？
+```md
+# producer
+
+## 役割
+
+- 制作デスクから受けた依頼を適切な部門へ振り分ける
+- 優先順位と進行順序を整理する
+- 複数部門が関わる場合は主担当を決める
+- 判断内容は `decisions/` に記録する
+
+## 振り分けポリシー
+
+- アイデア、テーマ、参考作品 → development
+- プロット、脚本、台詞 → screenplay
+- シーン、絵コンテ、ショット → directing
+- カメラ、画角、ライティング → cinematography
+- 構成、テンポ、編集方針 → editing
+- BGM、効果音、音響演出 → sound
+- 世界観、衣装、小道具 → art
+- タイトル、予告、公開計画 → distribution
+```
+
+### decisions/_template.md
+
+```md
+# decision-title
+
+- date: YYYY-MM-DD
+- request:
+- owner:
 
 ## 判断内容
-何を決めた？
 
 ## 振り分け先
-| 部署 | 指示内容 |
-|------|---------|
-|      |         |
 
 ## 理由
-なぜこの判断？
 
-## フォローアップ
-- [ ]
+## 関連ファイル
 ```
 
 ---
 
-## 3. ラッシュ確認 / 振り返り
+## development
 
-### 週次ラッシュ確認 / 振り返り（reviews/_template.md）
+### 役割
 
-```markdown
----
-week: "{{YYYY}}-W{{WW}}"
-period: "{{START_DATE}} ~ {{END_DATE}}"
-type: weekly-review
----
+* アイデア整理
+* ログライン作成
+* シノプシス作成
+* 参考作品調査
+* テーマ整理
 
-# 週次ラッシュ確認 / 振り返り: {{YYYY}}-W{{WW}}
+### CLAUDE.md テンプレート
 
-## 完了したタスク
-- [x]
+```md
+# development
 
-## 各部署の動き
+## 役割
 
-### 制作デスク室
--
+- 作品アイデアを整理する
+- ログライン、シノプシス、テーマを明文化する
+- 必要に応じて参考作品や資料を調査する
 
-### 制作進行
--
+## 成果物
 
-### その他
--
+- logline
+- synopsis
+- theme memo
+- reference memo
 
-## うまくいったこと
--
+## 命名規則
 
-## 改善できること
--
-
-## 学び・気づき
--
-
-## 来週の目標
-- [ ]
-
-## 持ち越し（未完了）
-- [ ]
+- loglines/: `logline-<slug>.md`
+- synopsis/: `synopsis-<slug>.md`
+- references/: `reference-<slug>.md`
 ```
 
----
+### loglines/_template.md
 
-## 4. 制作進行（プロジェクト管理）
+```md
+# logline-title
 
-### 部署トップ（制作進行/_template.md）
+## 一文ログライン
 
-```markdown
----
-type: department
-name: 制作進行
-role: プロジェクト進捗・マイルストーン・チケット管理
----
-
-# 制作進行（プロジェクト管理）
-
-プロジェクトの立ち上げから完了まで管理します。
-
-## サブフォルダ
-- `projects/` - プロジェクトごとの管理ファイル
-- `tickets/` - タスクチケット
-```
-
-### プロジェクト（制作進行/projects/_template.md）
-
-```markdown
----
-created: "{{YYYY-MM-DD}}"
-project: ""
-status: planning
-tags: []
----
-
-# プロジェクト: [名前]
-
-## 概要
-このプロジェクトは何？
-
-## ゴール
-何を達成する？
-
-## マイルストーン
-| # | マイルストーン | 期限 | 状態 |
-|---|-------------|------|------|
-| 1 |             |      | 未着手 |
-
-## 関連部署
--
-
-## メモ
--
-```
-
-### チケット（制作進行/tickets/_template.md）
-
-```markdown
----
-created: "{{YYYY-MM-DD}}"
-project: ""
-assignee: ""
-priority: normal
-status: open
----
-
-# [チケットタイトル]
-
-## 内容
-何をする？
-
-## 完了条件
-- [ ]
-
-## メモ
--
-```
-
----
-
-## 5. 企画脚本 / 演出
-
-### 部署トップ（research/_template.md）
-
-```markdown
----
-type: department
-name: 企画脚本 / 演出
-role: 市場調査・競合分析・技術調査
----
-
-# 企画脚本 / 演出
-
-調査・分析を担当します。
-
-## サブフォルダ
-- `topics/` - 調査トピックごとのファイル
-```
-
-### 調査トピック（research/topics/_template.md）
-
-```markdown
----
-created: "{{YYYY-MM-DD}}"
-topic: ""
-status: in-progress
-tags: []
----
-
-# 調査: [トピック]
+## 主人公
 
 ## 目的
-なぜ調査する？
 
-## 調査内容
+## 障害
 
-### 情報源 1
-- URL:
-- 要点:
-
-## 結論
--
-
-## ネクストアクション
-- [ ]
-
-## 参考リンク
--
+## フック
 ```
 
----
+### synopsis/_template.md
 
-## 6. マーケティング
-
-### 部署トップ（marketing/_template.md）
-
-```markdown
----
-type: department
-name: マーケティング
-role: コンテンツ企画・SNS戦略・集客
----
-
-# マーケティング
-
-コンテンツ企画と集客を担当します。
-
-## サブフォルダ
-- `content-plan/` - コンテンツ企画
-- `campaigns/` - キャンペーン管理
-```
-
-### コンテンツ企画（marketing/content-plan/_template.md）
-
-```markdown
----
-created: "{{YYYY-MM-DD}}"
-platform: ""
-status: draft
-publish_date: ""
-tags: []
----
-
-# [コンテンツタイトル]
-
-## プラットフォーム
-ブログ / YouTube / SNS / その他
-
-## ターゲット
-誰に向けて？
-
-## 構成
-1.
-2.
-3.
-
-## キーメッセージ
-
-
-## 下書き
-
-
-## ステータス
-- [ ] 構成
-- [ ] 下書き
-- [ ] ラッシュ確認 / 振り返り
-- [ ] 公開
-```
-
-### キャンペーン（marketing/campaigns/_template.md）
-
-```markdown
----
-created: "{{YYYY-MM-DD}}"
-campaign: ""
-status: planning
-period: ""
----
-
-# キャンペーン: [名前]
-
-## 目的
-何を達成する？
-
-## ターゲット
--
-
-## チャネル
--
-
-## 予算
--
-
-## KPI
-| 指標 | 目標 | 実績 |
-|------|------|------|
-|      |      |      |
-
-## 振り返り
--
-```
-
----
-
-## 7. 脚本 / 演出
-
-### 部署トップ（engineering/_template.md）
-
-```markdown
----
-type: department
-name: 脚本 / 演出
-role: 技術ドキュメント・設計・デバッグ
----
-
-# 脚本 / 演出
-
-技術的なドキュメントと設計を管理します。
-
-## サブフォルダ
-- `docs/` - 技術ドキュメント・設計書
-- `debug-log/` - デバッグ・バグ調査ログ
-```
-
-### 技術ドキュメント（engineering/docs/_template.md）
-
-```markdown
----
-created: "{{YYYY-MM-DD}}"
-topic: ""
-type: technical-doc
-tags: []
----
-
-# [ドキュメントタイトル]
+```md
+# synopsis-title
 
 ## 概要
 
+## 起
 
-## 設計・方針
+## 承
 
+## 転
 
-## 詳細
-
-
-## 参考
--
+## 結
 ```
 
-### デバッグログ（engineering/debug-log/_template.md）
+### references/_template.md
 
-```markdown
----
-created: "{{YYYY-MM-DD}}"
-status: open
-tags: []
----
+```md
+# reference-title
 
-# [バグ・問題のタイトル]
+## 参考元
 
-## 症状
-何が起きている？
+## 重要ポイント
 
-## 期待する動作
-
-
-## 再現手順
-1.
-
-## 調査
-
-### 仮説
--
-
-### 発見
--
-
-## 解決策
--
-
-## 再発防止
--
+## 作品への応用
 ```
 
 ---
 
-## 8. 経理
+## screenplay
 
-### 部署トップ（finance/_template.md）
+### 役割
 
-```markdown
----
-type: department
-name: 経理
-role: 請求書・経費・売上管理
----
+* ビートシート作成
+* アウトライン作成
+* 脚本ドラフト作成
+* 台詞設計
 
-# 経理
+### CLAUDE.md テンプレート
 
-お金周りを管理します。
+```md
+# screenplay
 
-## サブフォルダ
-- `invoices/` - 請求書
-- `expenses/` - 経費
+## 役割
+
+- 物語構造を脚本として整理する
+- ビートシート、アウトライン、ドラフトを作成する
+- 台詞やシーンの流れを明確化する
+
+## 成果物
+
+- beat-sheet
+- outline
+- draft
+
+## 命名規則
+
+- beat-sheets/: `beat-sheet-<slug>.md`
+- outlines/: `outline-<slug>.md`
+- drafts/: `draft-v<version>.md`
 ```
 
-### 請求書（finance/invoices/_template.md）
+### beat-sheets/_template.md
 
-```markdown
----
-date: "{{YYYY-MM-DD}}"
-client: ""
-amount: 0
-status: unpaid
-due_date: ""
----
+```md
+# beat-sheet-title
 
-# 請求書: [クライアント名] - {{YYYY-MM-DD}}
+## premise
 
-## 明細
-| 項目 | 数量 | 単価 | 小計 |
-|------|------|------|------|
-|      |      |      |      |
+## act 1
 
-## 合計
+## act 2
 
+## act 3
 
-## 支払い状況
-- [ ] 送付済み
-- [ ] 入金確認済み
+## turning points
 ```
 
-### 経費（finance/expenses/_template.md）
+### outlines/_template.md
 
-```markdown
----
-date: "{{YYYY-MM-DD}}"
-category: ""
-amount: 0
----
+```md
+# outline-title
 
-# 経費: [概要]
+## 全体構成
 
-## 詳細
-| 日付 | 項目 | カテゴリ | 金額 | メモ |
-|------|------|---------|------|------|
-|      |      |         |      |      |
+## scene list
 
-## 合計
-
+## 感情の流れ
 ```
 
----
+### drafts/_template.md
 
-## 9. 営業
+```md
+# draft-title
 
-### 部署トップ（sales/_template.md）
+## scene 1
 
-```markdown
----
-type: department
-name: 営業
-role: クライアント管理・提案書・案件パイプライン
----
+## scene 2
 
-# 営業
-
-クライアントとの関係を管理します。
-
-## サブフォルダ
-- `clients/` - クライアント情報
-- `proposals/` - 提案書
-```
-
-### クライアント（sales/clients/_template.md）
-
-```markdown
----
-client: ""
-created: "{{YYYY-MM-DD}}"
-status: active
----
-
-# クライアント: [名前]
-
-## 連絡先
-- 名前:
-- メール:
-- 会社:
-
-## 案件履歴
-| 案件 | 期間 | 金額 | 状態 |
-|------|------|------|------|
-|      |      |      |      |
-
-## コミュニケーション履歴
-
-### {{YYYY-MM-DD}}
--
-
-## メモ
--
-```
-
-### 提案書（sales/proposals/_template.md）
-
-```markdown
----
-created: "{{YYYY-MM-DD}}"
-client: ""
-status: draft
----
-
-# 提案書: [タイトル]
-
-## クライアント
-
-
-## 課題・ニーズ
-
-
-## 提案内容
-
-
-## スケジュール
-| フェーズ | 期間 | 内容 |
-|---------|------|------|
-|         |      |      |
-
-## 見積もり
-| 項目 | 金額 |
-|------|------|
-|      |      |
-
-## 合計
-
+## scene 3
 ```
 
 ---
 
-## 10. 美術
+## directing
 
-### 部署トップ（creative/_template.md）
+### 役割
 
-```markdown
----
-type: department
-name: 美術
-role: デザインブリーフ・ブランド管理・アセット管理
----
+* シーン設計
+* 絵コンテメモ
+* ショットリスト作成
+* 演出意図の整理
 
-# 美術
+### CLAUDE.md テンプレート
 
-デザインとブランドを管理します。
+```md
+# directing
 
-## サブフォルダ
-- `briefs/` - デザインブリーフ
-- `assets/` - アセット管理
+## 役割
+
+- 脚本を映像表現へ落とし込む
+- シーン単位の演出意図を整理する
+- 絵コンテやショットリストの基礎資料を作る
+
+## 成果物
+
+- scene design
+- storyboard note
+- shotlist
 ```
 
-### デザインブリーフ（creative/briefs/_template.md）
+### scenes/_template.md
 
-```markdown
----
-created: "{{YYYY-MM-DD}}"
-project: ""
-status: draft
----
-
-# デザインブリーフ: [タイトル]
+```md
+# scene-001
 
 ## 目的
-何のためのデザイン？
 
-## ターゲット
+## 登場人物
 
+## 場所
 
-## トーン・雰囲気
+## 演出意図
 
-
-## 要件
-- サイズ:
-- 形式:
-- 納期:
-
-## 参考イメージ
--
-
-## フィードバック
--
+## 感情の変化
 ```
 
-### アセット管理（creative/assets/_template.md）
+### storyboard/_template.md
 
-```markdown
----
-created: "{{YYYY-MM-DD}}"
-type: asset-list
----
+```md
+# storyboard-note-title
 
-# アセット管理
+## scene
 
-| アセット名 | 種類 | 場所 | 更新日 | メモ |
-|-----------|------|------|-------|------|
-|           |      |      |       |      |
+## key visual beats
+
+## camera idea
+
+## transition
 ```
 
----
+### shotlists/_template.md
 
-## 11. 人事
+```md
+# shotlist-title
 
-### 部署トップ（hr/_template.md）
-
-```markdown
----
-type: department
-name: 人事
-role: 採用管理・オンボーディング・チーム管理
----
-
-# 人事
-
-チームと採用を管理します。
-
-## サブフォルダ
-- `hiring/` - 採用管理
-```
-
-### 採用（hr/hiring/_template.md）
-
-```markdown
----
-created: "{{YYYY-MM-DD}}"
-position: ""
-status: open
----
-
-# 採用: [ポジション名]
-
-## 要件
--
-
-## 候補者
-| 名前 | 応募日 | ステータス | メモ |
-|------|-------|----------|------|
-|      |       |          |      |
-
-## 選考プロセス
-- [ ] 書類選考
-- [ ] 面接
-- [ ] 最終面接
-- [ ] オファー
+| shot | size | movement | subject | note |
+|---|---|---|---|---|
+| 1 | CU | pan | protagonist | emotion emphasis |
 ```
 
 ---
 
-## 12. 汎用テンプレート
+## cinematography
 
-ユーザーが追加するカスタム部署用のフォールバック。
+### 役割
 
-```markdown
----
-type: department
-name: "[部署名]"
-role: "[役割]"
----
+* カメラプラン
+* 画角設計
+* レンズ方針
+* ライティング設計
 
-# [部署名]
+### CLAUDE.md テンプレート
 
-## 概要
-この部署の役割。
-
-## メモ
--
-```
-
-### 汎用ファイルテンプレート
-
-```markdown
----
-created: "{{YYYY-MM-DD}}"
-tags: []
----
-
-# [タイトル]
-
-## 内容
--
-
-## メモ
--
-```
-
----
----
-
-# 部署別 CLAUDE.md テンプレート
-
-各部署フォルダに `CLAUDE.md` を配置し、部署固有のルールと振る舞いを定義する。
-組織構築（Step 5）で選択された部署の `CLAUDE.md` を自動生成する。
-
----
-
-## secretary/CLAUDE.md
-
-```markdown
-# 制作デスク室
+```md
+# cinematography
 
 ## 役割
-オーナーの常駐窓口。何でも相談に乗り、タスク管理・壁打ち・メモを担当する。
 
-## 口調・キャラクター
-- 丁寧だが堅すぎない。「〜ですね！」「承知しました」「いいですね！」
-- 主体的に提案する。「ついでにこれもやっておきましょうか？」
-- 壁打ち時はカジュアルに寄り添う
-- 過去のメモや決定事項を参照して文脈を持った対話をする
+- 撮影設計を担当する
+- 画角、レンズ、カメラ位置、ライティングの方針を整理する
+- 演出部と連携して視覚表現を具体化する
+```
 
-## ルール
-- オーナーからの入力はまず制作デスクが受け取る
-- 制作デスクで完結するもの（TODO、メモ、壁打ち、雑談）は直接対応
-- 部署の作業が必要と判断したらプロデューサーに振り分けを依頼
-- TODO形式: `- [ ] タスク | 優先度: 高/通常/低 | 期限: YYYY-MM-DD`
-- 日次ファイルは `todos/YYYY-MM-DD.md`
-- Inboxは `inbox/YYYY-MM-DD.md`。迷ったらまずここ
-- 壁打ちの結論が出たら `notes/` に保存を提案する
+### camera-plans/_template.md
 
-## フォルダ構成
-- `inbox/` - 未整理のクイックキャプチャ
-- `todos/` - 日次タスク管理（1日1ファイル）
-- `notes/` - 壁打ち・相談メモ（1トピック1ファイル）
+```md
+# camera-plan-title
+
+## scene
+
+## shot concept
+
+## lens
+
+## camera position
+
+## movement
+```
+
+### lighting/_template.md
+
+```md
+# lighting-plan-title
+
+## scene
+
+## mood
+
+## key light
+
+## fill light
+
+## practical light
 ```
 
 ---
 
-## プロデューサー/CLAUDE.md
+## editing
 
-```markdown
-# プロデューサー
+### 役割
+
+* 構成整理
+* テンポ調整
+* シーケンス構成
+* カットノート作成
+
+### CLAUDE.md テンプレート
+
+```md
+# editing
 
 ## 役割
-意思決定と部署振り分けを担当する。ユーザーとは直接対話せず、制作デスクを通じて動く。
 
-## ルール
-- 制作デスクから「部署の作業が必要」と判断された案件を受け取る
-- どの部署に振るか判断し、振り分け内容を制作デスクに返す
-- 複数部署にまたがる場合は主担当を決め、他は連携タスクとして記録
-- 全ての意思決定は `decisions/YYYY-MM-DD-title.md` にログを残す
-- 振り分け判断の理由も記録する
+- 映像全体の構成とテンポを整理する
+- シーン順やカットのつながりを調整する
+- 編集方針やラフカットメモを蓄積する
+```
 
-## 振り分け基準
-| 部署 | キーワード・文脈 |
-|------|----------------|
-| 制作進行 | プロジェクト、マイルストーン、進捗、スケジュール、チケット |
-| 企画脚本 / 演出 | 調べて、調査、競合、市場、トレンド |
-| マーケティング | コンテンツ、SNS、ブログ、集客、広告、LP |
-| 脚本 / 演出 | 実装、設計、アーキテクチャ、バグ、デバッグ |
-| 経理 | 請求、経費、売上、入金、確定申告 |
-| 営業 | クライアント、提案、見積、案件、商談 |
-| 美術 | デザイン、ロゴ、バナー、ブランド |
-| 人事 | 採用、チーム、メンバー |
+### structure/_template.md
 
-## フォルダ構成
-- `decisions/` - 意思決定ログ（1決定1ファイル）
+```md
+# structure-title
+
+## opening
+
+## middle
+
+## ending
+
+## pacing note
+```
+
+### cut-notes/_template.md
+
+```md
+# cut-note-title
+
+## current issue
+
+## proposed cut
+
+## expected effect
 ```
 
 ---
 
-## 制作進行/CLAUDE.md
+## sound
 
-```markdown
-# 制作進行（プロジェクト管理）
+### 役割
+
+* BGM方針
+* 効果音設計
+* ナレーション検討
+* 音響演出整理
+
+### CLAUDE.md テンプレート
+
+```md
+# sound
 
 ## 役割
-プロジェクトの立ち上げから完了まで進捗を管理する。
 
-## ルール
-- プロジェクトファイルは `projects/project-name.md`
-- チケットは `tickets/YYYY-MM-DD-title.md`
-- プロジェクトのステータス: planning → in-progress → review → completed → archived
-- チケットのステータス: open → in-progress → done
-- チケット優先度: high / normal / low
-- 新規プロジェクト作成時は必ずゴールとマイルストーンを定義
-- マイルストーン完了時は制作デスクに報告して週次ラッシュ確認 / 振り返りに反映
+- 音楽、効果音、ナレーションなど音の演出を整理する
+- シーンごとの音響意図を明文化する
+```
 
-## フォルダ構成
-- `projects/` - プロジェクト管理（1プロジェクト1ファイル）
-- `tickets/` - タスクチケット（1チケット1ファイル）
+### music/_template.md
+
+```md
+# music-brief-title
+
+## scene
+
+## mood
+
+## tempo
+
+## instrumentation
+```
+
+### sfx/_template.md
+
+```md
+# sfx-note-title
+
+## scene
+
+## effect
+
+## purpose
+
+## timing
 ```
 
 ---
 
-## research/CLAUDE.md
+## art
 
-```markdown
-# 企画脚本 / 演出
+### 役割
+
+* 世界観設定
+* ロケーション整理
+* 衣装・小道具メモ
+* ビジュアルアセット管理
+
+### CLAUDE.md テンプレート
+
+```md
+# art
 
 ## 役割
-市場調査、競合分析、技術調査を行い、調査結果をまとめる。
 
-## ルール
-- 調査ファイルは `topics/topic-name.md`
-- ステータス: planning → in-progress → completed
-- 情報源は必ずURLまたは出典を記載
-- 調査結果には必ず「結論」と「ネクストアクション」を含める
-- 調査完了時は制作デスクに報告し、関連部署への共有を提案
+- 世界観や美術要素を整理する
+- ロケーション、衣装、小道具、ビジュアル設定を蓄積する
+- 他部門が参照しやすい形でアセット情報を残す
+```
 
-## フォルダ構成
-- `topics/` - 調査トピック（1トピック1ファイル）
+### worldbuilding/_template.md
+
+```md
+# worldbuilding-title
+
+## setting
+
+## rules
+
+## visual motifs
+
+## references
+```
+
+### assets/_template.md
+
+```md
+# asset-title
+
+## 種別
+
+## 用途
+
+## 状態
+
+## 関連シーン
 ```
 
 ---
 
-## marketing/CLAUDE.md
+## distribution
 
-```markdown
-# マーケティング
+### 役割
+
+* タイトル案
+* 紹介文作成
+* 予告編方針
+* 公開・告知計画
+
+### CLAUDE.md テンプレート
+
+```md
+# distribution
 
 ## 役割
-コンテンツ企画、SNS戦略、キャンペーン管理を担当する。
 
-## ルール
-- コンテンツ企画は `content-plan/platform-title.md`
-- キャンペーンは `campaigns/campaign-name.md`
-- コンテンツのステータス: draft → writing → review → published
-- キャンペーンのステータス: planning → active → completed → reviewed
-- 公開日（publish_date）が決まっているものは必ず制作デスクのTODOにもリマインダーを入れる
-- KPIは数値で設定し、振り返り時に実績を記入
-
-## フォルダ構成
-- `content-plan/` - コンテンツ企画（1コンテンツ1ファイル）
-- `campaigns/` - キャンペーン管理（1キャンペーン1ファイル）
+- 公開に向けたタイトル、紹介文、予告、告知方針を整理する
+- 作品を外部へ届けるための情報設計を担当する
 ```
 
----
+### title/_template.md
 
-## engineering/CLAUDE.md
+```md
+# title-ideas
 
-```markdown
-# 脚本 / 演出
+## 候補
 
-## 役割
-技術ドキュメント、設計書、デバッグログを管理する。
+## 意図
 
-## ルール
-- 技術ドキュメントは `docs/topic-name.md`
-- デバッグログは `debug-log/YYYY-MM-DD-issue-name.md`
-- デバッグのステータス: open → investigating → resolved → closed
-- 設計書は必ず「概要」「設計・方針」「詳細」の構成にする
-- バグ修正時は「再発防止」セクションを必ず記入
-- 技術的な意思決定はプロデューサーのdecisionsにもログを残す
-
-## フォルダ構成
-- `docs/` - 技術ドキュメント・設計書
-- `debug-log/` - デバッグ・バグ調査ログ
+## 印象
 ```
 
----
+### promo/_template.md
 
-## finance/CLAUDE.md
+```md
+# promo-plan-title
 
-```markdown
-# 経理
+## target
 
-## 役割
-請求書、経費、売上の管理を担当する。
+## key message
 
-## ルール
-- 請求書は `invoices/YYYY-MM-DD-client-name.md`
-- 経費は `expenses/YYYY-MM-category.md`
-- 金額は税込・税抜を明記する（デフォルト税込）
-- 請求書のステータス: draft → sent → paid → overdue
-- 未入金の請求書は制作デスクのTODOにリマインダーを入れる
-- 月末に月次の経費集計を行う
+## teaser idea
 
-## フォルダ構成
-- `invoices/` - 請求書（1請求1ファイル）
-- `expenses/` - 経費（月別またはカテゴリ別）
-```
-
----
-
-## sales/CLAUDE.md
-
-```markdown
-# 営業
-
-## 役割
-クライアント管理、提案書作成、案件パイプラインを管理する。
-
-## ルール
-- クライアントファイルは `clients/client-name.md`
-- 提案書は `proposals/YYYY-MM-DD-proposal-title.md`
-- クライアントのステータス: prospect → active → inactive
-- 提案書のステータス: draft → sent → accepted → rejected
-- コミュニケーション履歴はクライアントファイルに日付付きで追記
-- 受注時は制作進行にプロジェクト作成を依頼、経理に請求書作成を連携
-
-## フォルダ構成
-- `clients/` - クライアント情報（1クライアント1ファイル）
-- `proposals/` - 提案書（1提案1ファイル）
-```
-
----
-
-## creative/CLAUDE.md
-
-```markdown
-# 美術
-
-## 役割
-デザインブリーフの作成、ブランド管理、アセット管理を担当する。
-
-## ルール
-- デザインブリーフは `briefs/project-name-brief.md`
-- アセット管理は `assets/asset-list.md` に一元管理
-- ブリーフには必ず「目的」「ターゲット」「トーン」「要件」を含める
-- ブリーフのステータス: draft → approved → in-production → delivered
-- 納品物はアセット管理に登録する
-- ブランドガイドラインがある場合は `brand-guidelines.md` として保存
-
-## フォルダ構成
-- `briefs/` - デザインブリーフ（1案件1ファイル）
-- `assets/` - アセット管理
-```
-
----
-
-## hr/CLAUDE.md
-
-```markdown
-# 人事
-
-## 役割
-採用管理、チームメンバーのオンボーディング、チーム管理を担当する。
-
-## ルール
-- 採用ポジションは `hiring/position-name.md`
-- 選考ステータス: open → screening → interviewing → offered → filled → closed
-- 候補者情報は個人情報に注意し、必要最小限を記録
-- オンボーディングチェックリストはポジションファイル内に含める
-- 採用決定時はプロデューサーの decisions にログを残す
-
-## フォルダ構成
-- `hiring/` - 採用管理（1ポジション1ファイル）
-```
-
----
-
-## 汎用部署 CLAUDE.md
-
-カスタム部署用のフォールバック。
-
-```markdown
-# {{DEPARTMENT_NAME}}
-
-## 役割
-{{DEPARTMENT_ROLE}}
-
-## ルール
-- ファイル命名: `kebab-case-title.md`
-- 1トピック1ファイル
-- 新規ファイルは `_template.md` をコピーして使用
-
-## フォルダ構成
-（カスタム）
+## release plan
 ```
