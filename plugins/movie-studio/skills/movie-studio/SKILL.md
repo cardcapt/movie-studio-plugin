@@ -1,12 +1,11 @@
 ---
-
 name: movie-studio
 description: >
 仮想映画制作スタジオを構築・運営するスキル。
 制作デスクが窓口となり、プロデューサーが判断して
 各制作部門（企画開発・脚本・演出・撮影・編集・音響・美術・配給/PR）へタスクを振り分ける。
 trigger: /movie
----------------
+---
 
 # 仮想映画制作スタジオ
 
@@ -206,31 +205,23 @@ trigger: /movie
 ├── production-desk/
 │   ├── CLAUDE.md
 │   ├── inbox/
-│   │   └── _template.md
 │   ├── todos/
-│   │   ├── _template.md
 │   │   └── YYYY-MM-DD.md
 │   └── notes/
-│       └── _template.md
 ├── producer/
 │   ├── CLAUDE.md
 │   └── decisions/
-│       └── _template.md
 ├── reviews/
-│   └── _template.md
+│   └── CLAUDE.md
 ├── development/
 │   ├── CLAUDE.md
 │   ├── loglines/
 │   │   └── _template.md
-│   ├── synopsis/
-│   │   └── _template.md
-│   └── references/
+│   └── synopsis/
 │       └── _template.md
 ├── screenplay/
 │   ├── CLAUDE.md
 │   ├── beat-sheets/
-│   │   └── _template.md
-│   ├── outlines/
 │   │   └── _template.md
 │   └── drafts/
 │       └── _template.md
@@ -238,62 +229,81 @@ trigger: /movie
 │   ├── CLAUDE.md
 │   ├── scenes/
 │   │   └── _template.md
-│   ├── storyboard/
+│   ├── shotlists/
 │   │   └── _template.md
-│   └── shotlists/
-│       └── _template.md
-├── cinematography/
-│   ├── CLAUDE.md
-│   ├── camera-plans/
-│   │   └── _template.md
-│   └── lighting/
+│   └── storyboard/
 │       └── _template.md
 ├── editing/
 │   ├── CLAUDE.md
-│   ├── structure/
-│   │   └── _template.md
 │   └── cut-notes/
 │       └── _template.md
 ├── sound/
-│   ├── CLAUDE.md
-│   ├── music/
-│   │   └── _template.md
-│   └── sfx/
-│       └── _template.md
+│   └── CLAUDE.md
 ├── art/
-│   ├── CLAUDE.md
-│   ├── worldbuilding/
-│   │   └── _template.md
-│   └── assets/
-│       └── _template.md
+│   └── CLAUDE.md
 └── distribution/
-    ├── CLAUDE.md
-    ├── title/
-    │   └── _template.md
-    └── promo/
-        └── _template.md
+    └── CLAUDE.md
 ```
 
-2. **各部門の `_template.md` を配置**
+2. **共通テンプレートを配置する**
 
-   * `references/departments.md` からテンプレートを取得する
-   * 言語設定に応じて日本語版 / 英語版を選択する
+* `references/claude-md-template.md` から `.movie-studio/CLAUDE.md` を生成する
+* `references/departments.md` から各部門の `CLAUDE.md` を生成する
+* 言語設定に応じて文言を調整する
 
-3. **各部門の `CLAUDE.md` を配置**
+3. **テンプレートファイルを `references/templates/` からコピーする**
 
-   * `references/departments.md` のテンプレートから生成する
-   * 部門固有の役割、命名規則、作業ルールを記載する
+以下の対応で `_template.md` を配置する。
 
-4. **`.movie-studio/CLAUDE.md` を生成**
+### development
 
-   * `references/claude-md-template.md` のテンプレートを使用する
-   * オンボーディングデータを埋め込む
+* `references/templates/development/loglines/_template.md`
+  → `.movie-studio/development/loglines/_template.md`
+* `references/templates/development/synopsis/_template.md`
+  → `.movie-studio/development/synopsis/_template.md`
 
-5. **今日の日次ファイルを作成**
+### screenplay
 
-   * `production-desk/todos/` に `YYYY-MM-DD.md` を作成する
+* `references/templates/screenplay/beat-sheets/_template.md`
+  → `.movie-studio/screenplay/beat-sheets/_template.md`
+* `references/templates/screenplay/drafts/_template.md`
+  → `.movie-studio/screenplay/drafts/_template.md`
 
-6. **初回 inbox ファイルを作成**
+### directing
+
+* `references/templates/directing/scenes/_template.md`
+  → `.movie-studio/directing/scenes/_template.md`
+* `references/templates/directing/shotlists/_template.md`
+  → `.movie-studio/directing/shotlists/_template.md`
+* `references/templates/directing/storyboard/_template.md`
+  → `.movie-studio/directing/storyboard/_template.md`
+
+### editing
+
+* `references/templates/editing/cut-notes/_template.md`
+  → `.movie-studio/editing/cut-notes/_template.md`
+
+4. **テンプレート未配置の部門は空ディレクトリと `CLAUDE.md` のみ生成する**
+
+以下の部門は、現時点では `references/templates/` に専用 `_template.md` が無い場合、ディレクトリと `CLAUDE.md` のみ作成する。
+
+* `production-desk/`
+* `producer/`
+* `reviews/`
+* `sound/`
+* `art/`
+* `distribution/`
+
+※ 将来的にテンプレートが追加されたら同様にコピー対象へ加える。
+
+5. **今日の日次ファイルを作成する**
+
+* `production-desk/todos/YYYY-MM-DD.md` を新規作成する
+* 当日の基本 TODO 見出しを入れる
+
+6. **初回 inbox ファイルを作成する**
+
+* `production-desk/inbox/` に初回メモファイルを作成する
 
 ---
 
@@ -378,7 +388,7 @@ trigger: /movie
 
 制作デスクは以下の人格で対話する。
 
-* **丁寧だが堅すぎない**: 「〜ですね！」「承知しました」「いいですね！」
+* **丁寧だが堅すぎない**: 「?ですね！」「承知しました」「いいですね！」
 * **主体的に提案する**: 「この流れなら次はログラインを固めましょうか？」
 * **記憶を活用する**: 過去のメモや決定事項を参照して文脈を持った対話をする
 * **適度にフランク**: 壁打ちのときはカジュアルに寄り添う
