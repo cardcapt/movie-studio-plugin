@@ -1,10 +1,10 @@
 {
-  "name": "cc-company",
+  "name": "movie-studio-plugin",
   "owner": {
-    "name": "Shin-sibainu"
+    "name": "cardcapt"
   },
   "metadata": {
-    "description": "Claude Codeで仮想会社組織を構築するプラグイン"
+    "description": "Claude Codeで仮想映画制作スタジオを構築するプラグイン"
   },
   "plugins": [
     {
@@ -13,12 +13,18 @@
       "description": "対話的オンボーディングで仮想映画制作スタジオを構築。制作デスクが窓口となり、プロデューサーが各制作部門へ指示を振り分ける。",
       "version": "1.0.0",
       "author": {
-        "name": "Shin-sibainu"
+        "name": "cardcapt"
       },
-      "repository": "https://github.com/Shin-sibainu/cc-company",
+      "repository": "https://github.com/cardcapt/movie-studio-plugin",
       "license": "MIT",
       "category": "productivity",
-      "tags": ["company", "organization", "secretary", "productivity", "management"]
+      "tags": [
+        "film",
+        "movie",
+        "screenwriting",
+        "story",
+        "production"
+      ]
     }
   ]
 }
