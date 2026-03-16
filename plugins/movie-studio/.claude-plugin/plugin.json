@@ -1,5 +1,30 @@
 {
-  "name": "movie-studio",
-  "description": "仮想映画制作スタジオ。制作デスクが窓口となり、脚本・演出・撮影・編集など映画制作の各部門へタスクを振り分ける。",
-  "version": "1.0.0"
+  "name": "movie-studio-plugin",
+  "owner": {
+    "name": "cardcapt"
+  },
+  "metadata": {
+    "description": "Claude Codeで仮想映画制作スタジオを構築するプラグイン"
+  },
+  "plugins": [
+    {
+      "name": "movie-studio",
+      "source": "./plugins/movie-studio",
+      "description": "対話的オンボーディングで仮想映画制作スタジオを構築。制作デスクが窓口となり、プロデューサーが各制作部門へ指示を振り分ける。",
+      "version": "1.0.0",
+      "author": {
+        "name": "cardcapt"
+      },
+      "repository": "https://github.com/cardcapt/movie-studio-plugin",
+      "license": "MIT",
+      "category": "productivity",
+      "tags": [
+        "film",
+        "movie",
+        "screenwriting",
+        "story",
+        "production"
+      ]
+    }
+  ]
 }
