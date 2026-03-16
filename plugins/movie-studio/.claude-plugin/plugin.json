@@ -4,13 +4,13 @@
     "name": "cardcapt"
   },
   "metadata": {
-    "description": "Claude Codeで仮想映画制作スタジオを構築するプラグイン"
+    "description": "A plugin for building a virtual film production studio with Claude Code"
   },
   "plugins": [
     {
       "name": "movie-studio",
       "source": "./plugins/movie-studio",
-      "description": "対話的オンボーディングで仮想映画制作スタジオを構築。制作デスクが窓口となり、プロデューサーが各制作部門へ指示を振り分ける。",
+      "description": "description": "Virtual film production studio workflow for Claude Code",
       "version": "1.0.0",
       "author": {
         "name": "cardcapt"
