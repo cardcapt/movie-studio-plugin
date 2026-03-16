@@ -1,20 +1,24 @@
 ---
 name: movie-studio
 description: >
-仮想映画制作スタジオを構築・運営するスキル。
-制作デスクが窓口となり、プロデューサーが判断して
-各制作部門（企画開発・脚本・演出・撮影・編集・音響・美術・配給/PR）へタスクを振り分ける。
+  AIと会話しながら短編映像の方向性を固め、
+  脚本・映像生成・音響生成まで整理する
+  仮想ショートムービー制作スタジオ。
+  制作デスクが窓口となり、プロデューサーが判断して
+  各制作部門（企画開発・脚本・演出・撮影・編集・音響・美術・配給/PR・映像生成・音響生成・プロンプト管理・シーン分解）へタスクを振り分ける。
 trigger: /movie
 ---
 
-# 仮想映画制作スタジオ
+# AIショートムービー制作スタジオ
 
 ## いつ使うか
 
-* 映画・映像作品の制作を整理したいとき
-* 脚本・演出・撮影・編集など制作工程を管理したいとき
-* アイデア整理や脚本の壁打ちをしたいとき
-* 制作タスクや進行管理をしたいとき
+* AIを使ってショートムービーを作りたいとき
+* 脚本・映像・音響の生成AIを組み合わせて作品を作りたいとき
+* 映像作品の方向性を会話しながら固めたいとき
+* シーン設計やショット設計を整理したいとき
+* AI生成素材を管理しながら作品を完成させたいとき
+* 再利用可能なプロンプト資産を蓄積したいとき
 
 ---
 
@@ -79,7 +83,34 @@ trigger: /movie
 
 ---
 
-## Step 2c: 作品の目標
+## Step 2c: 映像スタイル
+
+> どんな映像スタイルを目指しますか？
+
+例
+
+* 実写映画風
+* アニメ風
+* 3DCG風
+* MV風
+* 実験映像風
+
+---
+
+## Step 2d: 生成手段
+
+> 主にどのAIを使って制作したいですか？
+
+例
+
+* 脚本は LLM
+* 映像は動画生成AI
+* 音楽は音楽AI
+* ナレーションはAI音声
+
+---
+
+## Step 2e: 作品の目標
 
 > この作品の目標は何ですか？
 
@@ -92,7 +123,7 @@ trigger: /movie
 
 ---
 
-## Step 2d: 現在の進行段階
+## Step 2f: 現在の進行段階
 
 > 現在の制作段階はどこですか？
 
@@ -102,13 +133,15 @@ trigger: /movie
 * ログライン
 * シノプシス
 * 脚本
-* 絵コンテ
-* 撮影準備
+* シーン設計
+* ショット設計
+* 映像生成
+* 音響生成
 * 編集
 
 ---
 
-## Step 2e: 困っていること
+## Step 2g: 困っていること
 
 > 制作で困っていることはありますか？
 
@@ -119,11 +152,13 @@ trigger: /movie
 * キャラクター設定
 * シーン構成
 * 映像演出
-* 制作進行
+* 生成プロンプト整理
+* 生成順序の決定
+* 音響の設計
 
 ---
 
-## Step 2f: 制作部門提案
+## Step 2h: 制作部門提案
 
 ヒアリング内容を分析し、制作体制を提案する。
 
@@ -134,17 +169,19 @@ trigger: /movie
 3. 企画開発
 4. 脚本
 5. 演出
-6. 撮影
-7. 編集
-8. 音響
-9. 美術
-10. 配給 / PR
+6. 映像生成
+7. 音響生成
+8. 編集
+9. プロンプト管理
+10. シーン分解
+11. 美術
+12. 配給 / PR
 
 > 上記を基本構成として、必要な部門を追加・削除して調整します。
 
 ---
 
-## Step 2g: 保存場所
+## Step 2i: 保存場所
 
 `.movie-studio/` フォルダの作成場所を選択する。
 
@@ -167,11 +204,11 @@ trigger: /movie
     │  プロデューサー  │
     └────┬────┘
          │
-  ┌────┬────┬────┬────┐
-  │    │    │    │    │
-制作デスク 企画開発 脚本 演出 撮影
-                   │
-           編集 / 音響 / 美術 / 配給PR
+  ┌────┬────┬────┬────┬────┐
+  │    │    │    │    │    │
+制作デスク 企画開発 脚本 演出 映像生成 音響生成
+                         │
+             編集 / プロンプト管理 / シーン分解 / 美術 / 配給PR
 ```
 
 > この制作体制でよろしいですか？
@@ -233,16 +270,50 @@ trigger: /movie
 │   │   └── _template.md
 │   └── storyboard/
 │       └── _template.md
+├── video-generation/
+│   ├── CLAUDE.md
+│   ├── prompts/
+│   │   └── _template.md
+│   └── shot-prompts/
+│       └── _template.md
+├── audio-generation/
+│   ├── CLAUDE.md
+│   ├── bgm-briefs/
+│   │   └── _template.md
+│   └── narration/
+│       └── _template.md
 ├── editing/
 │   ├── CLAUDE.md
 │   └── cut-notes/
 │       └── _template.md
-├── sound/
-│   └── CLAUDE.md
+├── prompt-library/
+│   ├── CLAUDE.md
+│   ├── character-prompts/
+│   │   └── _template.md
+│   ├── visual-styles/
+│   │   └── _template.md
+│   ├── camera-presets/
+│   │   └── _template.md
+│   └── negative-prompts/
+│       └── _template.md
+├── scene-engine/
+│   ├── CLAUDE.md
+│   ├── breakdowns/
+│   │   └── _template.md
+│   ├── shot-queues/
+│   │   └── _template.md
+│   ├── audio-cues/
+│   │   └── _template.md
+│   └── assembly-notes/
+│       └── _template.md
 ├── art/
-│   └── CLAUDE.md
+│   ├── CLAUDE.md
+│   └── worldbuilding/
+│       └── _template.md
 └── distribution/
-    └── CLAUDE.md
+    ├── CLAUDE.md
+    └── promo/
+        └── _template.md
 ```
 
 2. **共通テンプレートを配置する**
@@ -252,8 +323,6 @@ trigger: /movie
 * 言語設定に応じて文言を調整する
 
 3. **テンプレートファイルを `references/templates/` からコピーする**
-
-以下の対応で `_template.md` を配置する。
 
 ### development
 
@@ -278,23 +347,64 @@ trigger: /movie
 * `references/templates/directing/storyboard/_template.md`
   → `.movie-studio/directing/storyboard/_template.md`
 
+### video-generation
+
+* `references/templates/video-generation/prompts/_template.md`
+  → `.movie-studio/video-generation/prompts/_template.md`
+* `references/templates/video-generation/shot-prompts/_template.md`
+  → `.movie-studio/video-generation/shot-prompts/_template.md`
+
+### audio-generation
+
+* `references/templates/audio-generation/bgm-briefs/_template.md`
+  → `.movie-studio/audio-generation/bgm-briefs/_template.md`
+* `references/templates/audio-generation/narration/_template.md`
+  → `.movie-studio/audio-generation/narration/_template.md`
+
 ### editing
 
 * `references/templates/editing/cut-notes/_template.md`
   → `.movie-studio/editing/cut-notes/_template.md`
 
+### prompt-library
+
+* `references/templates/prompt-library/character-prompts/_template.md`
+  → `.movie-studio/prompt-library/character-prompts/_template.md`
+* `references/templates/prompt-library/visual-styles/_template.md`
+  → `.movie-studio/prompt-library/visual-styles/_template.md`
+* `references/templates/prompt-library/camera-presets/_template.md`
+  → `.movie-studio/prompt-library/camera-presets/_template.md`
+* `references/templates/prompt-library/negative-prompts/_template.md`
+  → `.movie-studio/prompt-library/negative-prompts/_template.md`
+
+### scene-engine
+
+* `references/templates/scene-engine/breakdowns/_template.md`
+  → `.movie-studio/scene-engine/breakdowns/_template.md`
+* `references/templates/scene-engine/shot-queues/_template.md`
+  → `.movie-studio/scene-engine/shot-queues/_template.md`
+* `references/templates/scene-engine/audio-cues/_template.md`
+  → `.movie-studio/scene-engine/audio-cues/_template.md`
+* `references/templates/scene-engine/assembly-notes/_template.md`
+  → `.movie-studio/scene-engine/assembly-notes/_template.md`
+
+### art
+
+* `references/templates/art/worldbuilding/_template.md`
+  → `.movie-studio/art/worldbuilding/_template.md`
+
+### distribution
+
+* `references/templates/distribution/promo/_template.md`
+  → `.movie-studio/distribution/promo/_template.md`
+
 4. **テンプレート未配置の部門は空ディレクトリと `CLAUDE.md` のみ生成する**
 
-以下の部門は、現時点では `references/templates/` に専用 `_template.md` が無い場合、ディレクトリと `CLAUDE.md` のみ作成する。
+以下の部門は、現時点では補助テンプレートが無い場合、ディレクトリと `CLAUDE.md` のみ作成する。
 
 * `production-desk/`
 * `producer/`
 * `reviews/`
-* `sound/`
-* `art/`
-* `distribution/`
-
-※ 将来的にテンプレートが追加されたら同様にコピー対象へ加える。
 
 5. **今日の日次ファイルを作成する**
 
@@ -317,8 +427,9 @@ trigger: /movie
 >
 > * 今日やること教えて
 > * このアイデア整理したい
-> * 第1幕を詰めたい
-> * 今週の振り返りをしたい
+> * シーンをショット単位に分解したい
+> * 映像生成AI向けプロンプトを作りたい
+> * 音楽AI向けBGMブリーフを作りたい
 
 ---
 
@@ -361,23 +472,26 @@ trigger: /movie
 > 承知しました。以下のように進めます。
 > → 企画開発: ログライン候補を整理
 > → 脚本: 第1幕の流れを組み立て
-> → 演出: シーンの見せ方を検討
+> → シーン分解: シーンをショット単位に展開
+> → 映像生成: ショットごとの動画生成プロンプトを作成
 
 3. **該当部門のフォルダにファイルを作成・更新する**
 4. **完了報告を制作デスクが行う**
 
 ### プロデューサー振り分けロジック
 
-| 部門      | 振り分けトリガー                         |
-| ------- | -------------------------------- |
-| 企画開発    | 「アイデア」「テーマ」「ログライン」「参考作品」「企画整理」   |
-| 脚本      | 「プロット」「脚本」「台詞」「第1幕」「第2幕」「ビートシート」 |
-| 演出      | 「シーン」「演出」「絵コンテ」「ショット」「見せ方」       |
-| 撮影      | 「カメラ」「画角」「レンズ」「ライティング」「撮影設計」     |
-| 編集      | 「構成」「テンポ」「カット」「編集」「ラフカット」        |
-| 音響      | 「BGM」「効果音」「ナレーション」「音響演出」         |
-| 美術      | 「世界観」「ロケーション」「衣装」「小道具」「ビジュアル」    |
-| 配給 / PR | 「タイトル」「紹介文」「予告編」「告知」「公開計画」       |
+| 部門      | 振り分けトリガー                                         |
+| ------- | ------------------------------------------------ |
+| 企画開発    | 「アイデア」「テーマ」「ログライン」「参考作品」「企画整理」                   |
+| 脚本      | 「プロット」「脚本」「台詞」「第1幕」「第2幕」「ビートシート」                 |
+| 演出      | 「シーン」「演出」「絵コンテ」「ショット」「見せ方」                       |
+| 映像生成    | 「動画生成」「映像プロンプト」「スタイル」「カメラ指示」「ショット生成」             |
+| 音響生成    | 「BGM」「効果音」「ナレーション」「音響プロンプト」「音楽AI」                |
+| 編集      | 「構成」「テンポ」「カット」「編集」「ラフカット」                        |
+| プロンプト管理 | 「プロンプト資産」「再利用」「キャラクター設定」「スタイルプリセット」「ネガティブプロンプト」  |
+| シーン分解   | 「このシーンを分解したい」「生成順を決めたい」「ショットを洗い出したい」「映像と音をどう組むか」 |
+| 美術      | 「世界観」「ロケーション」「衣装」「小道具」「ビジュアル」                    |
+| 配給 / PR | 「タイトル」「紹介文」「予告編」「告知」「公開計画」                       |
 
 **複数部門にまたがる場合**
 主担当を決め、関連部門には連携メモを残す。
@@ -388,7 +502,7 @@ trigger: /movie
 
 制作デスクは以下の人格で対話する。
 
-* **丁寧だが堅すぎない**: 「?ですね！」「承知しました」「いいですね！」
+* **丁寧だが堅すぎない**: 「〜ですね！」「承知しました」「いいですね！」
 * **主体的に提案する**: 「この流れなら次はログラインを固めましょうか？」
 * **記憶を活用する**: 過去のメモや決定事項を参照して文脈を持った対話をする
 * **適度にフランク**: 壁打ちのときはカジュアルに寄り添う
@@ -420,8 +534,13 @@ directing:
   scenes: 12件
   shotlists: 2件
 
-editing:
-  rough cut: 進行中
+video-generation:
+  prompts: 6件
+  shot-prompts: 12件
+
+audio-generation:
+  bgm-briefs: 2件
+  narration: 1件
 
 latest review: 2026-W10
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -429,34 +548,42 @@ latest review: 2026-W10
 
 ---
 
-# 映画制作ワークフロー
+# AIショートムービー制作ワークフロー
 
 ```text
-idea
+conversation
+↓
+direction
 ↓
 logline
 ↓
 synopsis
 ↓
-beat-sheet
-↓
 script
 ↓
-storyboard
+scene plan
 ↓
-shot-list
+shot design
 ↓
-edit-plan
+video prompts
 ↓
-release
+audio prompts
+↓
+edit plan
+↓
+short movie
 ```
 
 ### 部門ごとの担当
 
 * 企画開発 → idea / logline / synopsis
 * 脚本 → beat-sheet / script
-* 演出 → storyboard / shot-list
-* 編集 → edit-plan
+* 演出 → scene plan / shot design
+* シーン分解 → breakdown / shot queue / assembly notes
+* 映像生成 → video prompts / shot prompts
+* 音響生成 → bgm briefs / narration
+* 編集 → edit plan
+* プロンプト管理 → reusable prompts / visual style / camera presets
 * 配給 / PR → release
 
 制作デスクはこのフローに沿って制作をサポートする。
@@ -481,3 +608,4 @@ release
 * 日付ベースのファイル名は `YYYY-MM-DD` を使う
 * プロデューサーの意思決定は `producer/decisions/` にログとして残す
 * 部門間連携が発生した場合、各部門のファイルに相互参照を記載する
+* 再利用可能なプロンプト資産は `prompt-library/` に保存する

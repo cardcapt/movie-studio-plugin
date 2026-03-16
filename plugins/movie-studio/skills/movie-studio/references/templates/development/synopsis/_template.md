@@ -1,6 +1,3 @@
-# development/synopsis/_template.md
-
-```md
 # synopsis-title
 
 - created_at: YYYY-MM-DD
@@ -42,16 +39,3 @@
 ## notes
 
 <!-- 改善点、検討メモ、参考作品メモ -->
-```
-
-## 配置先
-
-```text
-plugins/movie-studio/skills/movie-studio/references/templates/development/synopsis/_template.md
-```
-
-## 補足
-
-* `logline` から `beat-sheet` へつなぐ中間成果物として使う
-* 長さは 300〜800 字程度の要約を想定
-* 必要なら `起承転結` ではなく `3幕構成` に置き換えてもよい

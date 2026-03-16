@@ -10,7 +10,7 @@
     {
       "name": "movie-studio",
       "source": "./plugins/movie-studio",
-      "description": "description": "Virtual film production studio workflow for Claude Code",
+      "description": "Virtual film production studio workflow for Claude Code",
       "version": "1.0.0",
       "author": {
         "name": "cardcapt"

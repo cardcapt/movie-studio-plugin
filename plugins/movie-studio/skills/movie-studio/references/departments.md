@@ -49,20 +49,6 @@
 - 専門作業が必要な場合のみ他部門へ回す
 ```
 
-### _template.md
-
-```md
-# タイトル
-
-## 概要
-
-## 現状
-
-## 次にやること
-
-## 関連ファイル
-```
-
 ---
 
 ## producer
@@ -91,11 +77,13 @@
 - アイデア、テーマ、参考作品 → development
 - プロット、脚本、台詞 → screenplay
 - シーン、絵コンテ、ショット → directing
-- カメラ、画角、ライティング → cinematography
+- シーン分解、生成順、組み立て → scene-engine
+- 動画生成、映像プロンプト、ショット生成 → video-generation
+- BGM、ナレーション、音響プロンプト → audio-generation
+- 再利用プロンプト、キャラクター設定、スタイル管理 → prompt-library
 - 構成、テンポ、編集方針 → editing
-- BGM、効果音、音響演出 → sound
-- 世界観、衣装、小道具 → art
-- タイトル、予告、公開計画 → distribution
+- 世界観、衣装、小道具、ビジュアル設定 → art
+- タイトル、予告、紹介文、公開計画 → distribution
 ```
 
 ### decisions/_template.md
@@ -150,51 +138,6 @@
 
 - loglines/: `logline-<slug>.md`
 - synopsis/: `synopsis-<slug>.md`
-- references/: `reference-<slug>.md`
-```
-
-### loglines/_template.md
-
-```md
-# logline-title
-
-## 一文ログライン
-
-## 主人公
-
-## 目的
-
-## 障害
-
-## フック
-```
-
-### synopsis/_template.md
-
-```md
-# synopsis-title
-
-## 概要
-
-## 起
-
-## 承
-
-## 転
-
-## 結
-```
-
-### references/_template.md
-
-```md
-# reference-title
-
-## 参考元
-
-## 重要ポイント
-
-## 作品への応用
 ```
 
 ---
@@ -232,46 +175,6 @@
 - drafts/: `draft-v<version>.md`
 ```
 
-### beat-sheets/_template.md
-
-```md
-# beat-sheet-title
-
-## premise
-
-## act 1
-
-## act 2
-
-## act 3
-
-## turning points
-```
-
-### outlines/_template.md
-
-```md
-# outline-title
-
-## 全体構成
-
-## scene list
-
-## 感情の流れ
-```
-
-### drafts/_template.md
-
-```md
-# draft-title
-
-## scene 1
-
-## scene 2
-
-## scene 3
-```
-
 ---
 
 ## directing
@@ -301,99 +204,94 @@
 - shotlist
 ```
 
-### scenes/_template.md
-
-```md
-# scene-001
-
-## 目的
-
-## 登場人物
-
-## 場所
-
-## 演出意図
-
-## 感情の変化
-```
-
-### storyboard/_template.md
-
-```md
-# storyboard-note-title
-
-## scene
-
-## key visual beats
-
-## camera idea
-
-## transition
-```
-
-### shotlists/_template.md
-
-```md
-# shotlist-title
-
-| shot | size | movement | subject | note |
-|---|---|---|---|---|
-| 1 | CU | pan | protagonist | emotion emphasis |
-```
-
 ---
 
-## cinematography
+## scene-engine
 
 ### 役割
 
-* カメラプラン
-* 画角設計
-* レンズ方針
-* ライティング設計
+* シーン分解
+* ショット生成順管理
+* 音と映像の組み立て設計
+* 編集への橋渡し
 
 ### CLAUDE.md テンプレート
 
 ```md
-# cinematography
+# scene-engine
 
 ## 役割
 
-- 撮影設計を担当する
-- 画角、レンズ、カメラ位置、ライティングの方針を整理する
-- 演出部と連携して視覚表現を具体化する
+- シーンを生成AIで扱いやすい単位に分解する
+- 生成順序や依存関係を整理する
+- 音と映像をどう組み立てるかを設計する
+- 編集部へ引き渡すためのノートを残す
+
+## 成果物
+
+- breakdown
+- shot queue
+- audio cue
+- assembly note
 ```
 
-### camera-plans/_template.md
+---
+
+## video-generation
+
+### 役割
+
+* 動画生成AI向けプロンプト作成
+* ショット単位の映像プロンプト管理
+* モデル別メモ
+* スタイル適用
+
+### CLAUDE.md テンプレート
 
 ```md
-# camera-plan-title
+# video-generation
 
-## scene
+## 役割
 
-## shot concept
+- 動画生成AIに渡すプロンプトを整理する
+- ショットごとの映像指示を作成する
+- スタイルやカメラ指示を明文化する
+- 必要に応じて prompt-library を参照する
 
-## lens
+## 成果物
 
-## camera position
-
-## movement
+- scene-level prompt
+- shot prompt
+- generation memo
 ```
 
-### lighting/_template.md
+---
+
+## audio-generation
+
+### 役割
+
+* 音楽AI向け BGM brief
+* ナレーション設計
+* 効果音指示
+* 音響演出整理
+
+### CLAUDE.md テンプレート
 
 ```md
-# lighting-plan-title
+# audio-generation
 
-## scene
+## 役割
 
-## mood
+- 音楽AIやAI音声向けの指示を整理する
+- BGM、ナレーション、効果音の方針を明文化する
+- シーンごとの音響意図を整理する
 
-## key light
+## 成果物
 
-## fill light
-
-## practical light
+- bgm brief
+- narration script
+- audio cue
 ```
 
 ---
@@ -417,82 +315,43 @@
 - 映像全体の構成とテンポを整理する
 - シーン順やカットのつながりを調整する
 - 編集方針やラフカットメモを蓄積する
-```
 
-### structure/_template.md
+## 成果物
 
-```md
-# structure-title
-
-## opening
-
-## middle
-
-## ending
-
-## pacing note
-```
-
-### cut-notes/_template.md
-
-```md
-# cut-note-title
-
-## current issue
-
-## proposed cut
-
-## expected effect
+- structure note
+- cut note
+- edit plan
 ```
 
 ---
 
-## sound
+## prompt-library
 
 ### 役割
 
-* BGM方針
-* 効果音設計
-* ナレーション検討
-* 音響演出整理
+* 再利用可能プロンプトの管理
+* キャラクター設定プロンプト
+* 映像スタイルプリセット
+* カメラプリセット
+* ネガティブプロンプト管理
 
 ### CLAUDE.md テンプレート
 
 ```md
-# sound
+# prompt-library
 
 ## 役割
 
-- 音楽、効果音、ナレーションなど音の演出を整理する
-- シーンごとの音響意図を明文化する
-```
+- 再利用可能なプロンプト資産を保存する
+- キャラクター、スタイル、カメラ、ネガティブプロンプトを管理する
+- 他部門が参照できる共通ライブラリとして機能する
 
-### music/_template.md
+## 成果物
 
-```md
-# music-brief-title
-
-## scene
-
-## mood
-
-## tempo
-
-## instrumentation
-```
-
-### sfx/_template.md
-
-```md
-# sfx-note-title
-
-## scene
-
-## effect
-
-## purpose
-
-## timing
+- character prompt
+- visual style
+- camera preset
+- negative prompt
 ```
 
 ---
@@ -504,7 +363,7 @@
 * 世界観設定
 * ロケーション整理
 * 衣装・小道具メモ
-* ビジュアルアセット管理
+* ビジュアルモチーフ整理
 
 ### CLAUDE.md テンプレート
 
@@ -516,34 +375,6 @@
 - 世界観や美術要素を整理する
 - ロケーション、衣装、小道具、ビジュアル設定を蓄積する
 - 他部門が参照しやすい形でアセット情報を残す
-```
-
-### worldbuilding/_template.md
-
-```md
-# worldbuilding-title
-
-## setting
-
-## rules
-
-## visual motifs
-
-## references
-```
-
-### assets/_template.md
-
-```md
-# asset-title
-
-## 種別
-
-## 用途
-
-## 状態
-
-## 関連シーン
 ```
 
 ---
@@ -566,30 +397,4 @@
 
 - 公開に向けたタイトル、紹介文、予告、告知方針を整理する
 - 作品を外部へ届けるための情報設計を担当する
-```
-
-### title/_template.md
-
-```md
-# title-ideas
-
-## 候補
-
-## 意図
-
-## 印象
-```
-
-### promo/_template.md
-
-```md
-# promo-plan-title
-
-## target
-
-## key message
-
-## teaser idea
-
-## release plan
 ```
