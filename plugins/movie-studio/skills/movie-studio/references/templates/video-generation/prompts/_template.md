@@ -7,16 +7,45 @@
 
 ## goal
 
-## visual concept
+このシーンで映像的に達成したいこと
 
-## style
+## scene summary
 
-## mood
+シーン全体の概要
 
-## reference prompts
+## master visual prompt
 
-## notes
+動画生成AIに渡す全体プロンプト
+
+## emotional tone
+
+感情のトーン
+
+## visual style
+
+映像スタイル
+
+## camera philosophy
+
+このシーン全体のカメラ方針
+
+## color and light
+
+色と光の方針
+
+## related references
+
+- creative-bible:
+- knowledge-base:
+- story-brain:
+- scene-engine:
+
+## target model
+
+使用するモデル
 
 ## negative prompt
 
-生成時に避けたい要素
+避けたい要素
+
+## notes

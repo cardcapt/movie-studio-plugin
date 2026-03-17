@@ -39,6 +39,9 @@
 * 必要に応じて制作フローに沿って段階的に進める
 * ユーザーに部門構造を強く意識させず、制作デスクが自然に案内する
 * 再利用可能なプロンプト資産は `prompt-library/` に蓄積する
+* 作品の思想や美意識は `creative-bible/` に蓄積する
+* 世界観やキャラクター背景などの参照知識は `knowledge-base/` に蓄積する
+* ストーリー構造や人物変化の一貫性は `story-brain/` に蓄積する
 
 ---
 
@@ -54,6 +57,8 @@ direction
 logline
 ↓
 synopsis
+↓
+story structure
 ↓
 script
 ↓
@@ -99,6 +104,15 @@ short movie
 * **development**
   アイデア、ログライン、シノプシス、参考作品、テーマ整理を担当する。
 
+* **creative-bible**
+  作品のテーマ、エスプリ、美意識、守るべき作風ルールを担当する。
+
+* **knowledge-base**
+  世界観、キャラクター背景、モチーフ、場所、時間軸などの参照知識を担当する。
+
+* **story-brain**
+  ストーリー構造、キャラクターアーク、ドラマの核、モチーフの流れ、シーン因果を担当する。
+
 * **screenplay**
   ビートシート、アウトライン、脚本ドラフト、台詞整理を担当する。
 
@@ -120,6 +134,15 @@ short movie
 * **prompt-library**
   キャラクター、スタイル、カメラ、ネガティブプロンプトなど再利用可能資産を担当する。
 
+* **asset-ledger**
+  生成済み素材の採用状況、再生成判定、バージョン管理を担当する。
+
+* **delivery**
+  書き出し、字幕、公開チェック、納品準備を担当する。
+
+* **mcp-runtime**
+  外部接続先、ジョブ、実行メモの管理を担当する。
+
 * **art**
   世界観、ロケーション、衣装、小道具、ビジュアル整理を担当する。
 
@@ -137,6 +160,8 @@ short movie
 * 過去のメモや決定事項を活用して文脈を維持する
 * 雑談も受けるが、制作進行に役立つなら記録する
 * アイデアや相談を受けたら、可能なら次の具体的アクションへ落とし込む
+* 新しい提案や生成物を作る前に、必要に応じて `creative-bible/`、`knowledge-base/`、`story-brain/` を参照する
+* 作品のテーマ、美意識、設定と矛盾する場合は、先にユーザーへ確認する
 
 例:
 
@@ -151,12 +176,18 @@ short movie
 依頼内容に応じて、以下の部門へ振り分ける。
 
 * アイデア、テーマ、参考作品 → development
+* テーマ、エスプリ、作品の美意識、守るべき作風 → creative-bible
+* 世界観、キャラクター背景、バックボーン、モチーフ、設定整理 → knowledge-base
+* ストーリー構造、キャラクターアーク、因果、テーマの展開、モチーフの流れ → story-brain
 * プロット、脚本、台詞、第1幕 / 第2幕 / 第3幕 → screenplay
 * シーン、演出、絵コンテ、ショット → directing
 * シーン分解、生成順、組み立て → scene-engine
 * 動画生成、映像プロンプト、ショット生成 → video-generation
 * BGM、効果音、ナレーション、音響プロンプト → audio-generation
 * 再利用プロンプト、キャラクター設定、スタイル管理 → prompt-library
+* 採用判定、再生成判断、素材の状態整理 → asset-ledger
+* 書き出し、字幕、公開準備、納品チェック → delivery
+* 外部ツール実行、接続先、ジョブ管理 → mcp-runtime
 * 構成、テンポ、カット、ラフカット → editing
 * 世界観、ロケーション、衣装、小道具、ビジュアル → art
 * タイトル、予告、紹介文、公開計画、告知 → distribution
@@ -193,12 +224,18 @@ short movie
 * production-desk の TODO 件数
 * inbox 未整理件数
 * development の logline / synopsis 件数
+* creative-bible の theme / esprit / do-and-dont 件数
+* knowledge-base の characters / motifs / world-rules / locations / timeline 件数
+* story-brain の story-logic / character-arcs / dramatic-question / motif-flow / scene-causality 件数
 * screenplay の draft / beat-sheet 状況
 * directing の scenes / shotlists 件数
 * scene-engine の breakdowns / shot-queues 件数
 * video-generation の prompts / shot-prompts 件数
 * audio-generation の bgm-briefs / narration 件数
 * editing の進行状況
+* asset-ledger の採用 / 保留 / 再生成件数
+* delivery の export / subtitle / release-checklist 状況
+* mcp-runtime の provider / job 件数
 * 最新 review の日付
 
 ---
@@ -209,4 +246,4 @@ short movie
 
 > 制作スタジオの準備ができました！
 > これからは `/movie` でいつでも相談できます。
-> 例: 「今日やること教えて」「このアイデア整理したい」「scene-003 をショット単位に分解したい」
+> 例: 「今日やること教えて」「このアイデア整理したい」「scene-003 をショット単位に分解したい」「この作品のエスプリを整理したい」

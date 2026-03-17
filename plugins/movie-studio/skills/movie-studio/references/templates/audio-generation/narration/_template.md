@@ -1,30 +1,41 @@
-# narration-title
+# narration
 
-- created_at: YYYY-MM-DD
-- status: draft
-- owner: audio-generation
-- scene: scene-001
+## テキスト
 
-## purpose
+{{TEXT}}
 
-このナレーションの役割
+---
 
-## script
+## トーン
 
-ナレーション本文
+{{TONE}}
 
-## tone
+例:
+- calm
+- quiet
+- slightly emotional
 
-声のトーン、感情、話し方
+---
 
-## pacing
+## スピード
 
-話す速さ
+{{SPEED}}
 
-## timing
+例:
+- slow
 
-どのタイミングで入れるか
+---
 
-## notes
+## 意図
 
-<!-- 補足メモ -->
+{{PURPOSE}}
+
+例:
+- 観客の内面に寄り添う
+
+---
+
+## NG
+
+- 説明的すぎる
+- 感情を言いすぎる
